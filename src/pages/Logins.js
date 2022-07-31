@@ -18,7 +18,8 @@ function Logins() {
     });
     console.log(infUser.user.uid);
     const docuRef = doc(firestore, `usuarios/${infUser.user.uid}`);
-    setDoc(docuRef, { correo: email, rol: rol })
+    setDoc(docuRef, { correo: email })
+    // setDoc(docuRef, { correo: email, rol: rol })
   }
 
   function submitHandler(e) {
@@ -26,8 +27,9 @@ function Logins() {
 
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
-    const rol = e.target.elements.rol.value;
-    console.log('submit', email, password, rol);
+    // const rol = e.target.elements.rol.value;
+    console.log('submit', email, password);
+    // console.log('submit', email, password, rol);
 
     if (isRegister) {
       //REGIS
@@ -38,52 +40,29 @@ function Logins() {
   }
 
   return (
-    <div className={styles.Login}>
-      <div className={styles.container}>
-        <h1>{isRegister ? "Registrate" : "Inicia sesión"}</h1>
+    <div className={styles.box}>
+      <form onSubmit={submitHandler}>
+      <fieldset>
+      <legend><b><h1>{isRegister ? "Registrate" : "Inicia sesión"}</h1></b></legend>
+    
+          <div className={styles.inputBox}>
+            <input type="text" name="email" id="email" className={styles.inputUser} required />
+            <label for="email" className={styles.labelInput}>Email</label>
+          </div>
 
-        <form className={styles.form} onSubmit={submitHandler}>
-          <label className={styles.label}>
-            <span>Email:</span>
-            <input type='email'
-              name='email'
-              className={styles.input}
-              required
-              placeholder='Email'
-              id="email"
-            />
-          </label>
-          <label className={styles.label}>
-            <span>contrasena:</span>
-            <input type='password'
-              name='password'
-              className={styles.input}
-              required
-              id="password"
-              placeholder='Ingrese su contrasena'
-            />
-          </label>
+          <div className={styles.inputBox}>
+            <input type="password" name="password" id="password" className={styles.inputUser} required />
+            <label for="password" className={styles.labelInput}>Contrasena</label>
+          </div>
 
-          <label className={styles.label}>
-            <span>Rol:</span>
-            <select id="rol"  className={styles.input}>
-              <option value='admin'>Administrador</option>
-              <option value='user'>Usuario</option>
-            </select>
-          </label>
+          <input className={styles.submit}  type="submit"
+          value={isRegister ? "Registrar" : "iniciar sesión"}  name="submit" id="submit" />
 
-          <input
-           className={styles.primarybuttons}
-            type="submit"
-            value={isRegister ? "Registrar" : "iniciar sesión"}
-            
-          />
-        </form>
-
-        <button className={styles.primarybutton} onClick={() => setIsRegister(!isRegister)}>
-          {isRegister ? 'ya tengo una cuenta' : 'Quiero Registrarme'}
-        </button>
-      </div>
+          <button className={styles.submits} onClick={() => setIsRegister(!isRegister)}>
+        {isRegister ? 'ya tengo una cuenta' : 'Quiero Registrarme'}
+      </button>
+        </fieldset>
+      </form>
     </div>
   )
 }
