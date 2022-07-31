@@ -15,8 +15,6 @@ const Header = ({cart}) => {
 	const [toggleOrders, setToggleOrders] = useState(false);
 	const { state } = useContext(AppContext)
 
-	
-
 	const handleToggle = () => {
 		setToggle(!toggle);
 	}
