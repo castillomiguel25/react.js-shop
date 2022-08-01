@@ -28,7 +28,7 @@ function Logins() {
   const firestore = getFirestore(firebaseApp)
   const [isRegister, setIsRegister] = useState(false);
 
-  async function RegisterUser(email, password, rol) {
+  async function RegisterUser(email, password) {
     const infUser = await createUserWithEmailAndPassword(auth, email, password).then((usuariofirebase) => {
       return usuariofirebase;
     });
@@ -47,7 +47,8 @@ function Logins() {
     // console.log('submit', email, password, rol);
     if (isRegister) {
       //REGIS
-      RegisterUser(email, password, rol);
+      RegisterUser(email, password);
+      // RegisterUser(email, password, rol);
     } else {
       signInWithEmailAndPassword(auth, email, password);
     }
@@ -69,7 +70,7 @@ function Logins() {
       <div className={styles.box}>
       <form onSubmit={submitHandler}>
       <fieldset>
-      <legend><b><h1>{isRegister ? "Registrate" : "Inicia sesión"}</h1></b></legend>
+      <legend><b><h1>{isRegister ? "Registrate" : "Inicia Sesión"}</h1></b></legend>
 
             <img src={logo} alt="logo" className={styles.navlogo} />
     
