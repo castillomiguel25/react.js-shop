@@ -1,12 +1,28 @@
-import { async } from '@firebase/util';
+
 import React, { useState } from 'react'
 import styles from '../styles/login.module.css'
-
 import firebaseApp from "../Callfirebase/firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore"
 
+
+import logo from '@logos/logo_yard_sale.svg'
+
+
 const auth = getAuth(firebaseApp);
+
+// const handlerAuth = ()=>{
+//   let provider = new firebaseApp.auth.GoogleAuthProvider(GoogleAuthProvider);
+
+//   firebaseApp.auth().signInWithPopup(provider)
+//   .then(function(result) {
+//     setUser(result.user)
+//      console.log(' ha iniciado session');
+//   })
+//   .catch(function(error){
+//        console.log(error.code , error.message)
+//   })
+// }
 
 function Logins() {
   const firestore = getFirestore(firebaseApp)
@@ -24,13 +40,11 @@ function Logins() {
 
   function submitHandler(e) {
     e.preventDefault();
-
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
     // const rol = e.target.elements.rol.value;
     console.log('submit', email, password);
     // console.log('submit', email, password, rol);
-
     if (isRegister) {
       //REGIS
       RegisterUser(email, password, rol);
@@ -39,11 +53,25 @@ function Logins() {
     }
   }
 
+  // useEffect(()=>{
+  //   firebaseApp.auth().onAuthStateChanged(user=>{
+  //     setUser(user)
+  //   })
+   
+  // },[])
+
+//   const renderLoginButton = ()=>{
+//      return  <button onClick={handlerAuth} className="btn btn-primary">Login with google</button>
+// }
+
   return (
-    <div className={styles.box}>
+    // <Fragment>
+      <div className={styles.box}>
       <form onSubmit={submitHandler}>
       <fieldset>
       <legend><b><h1>{isRegister ? "Registrate" : "Inicia sesión"}</h1></b></legend>
+
+            <img src={logo} alt="logo" className={styles.navlogo} />
     
           <div className={styles.inputBox}>
             <input type="text" name="email" id="email" className={styles.inputUser} required />
@@ -56,15 +84,20 @@ function Logins() {
           </div>
 
           <input className={styles.submit}  type="submit"
-          value={isRegister ? "Registrar" : "iniciar sesión"}  name="submit" id="submit" />
+          value={isRegister ? "Registrar" : "Iniciar Sesión"}  name="submit" id="submit" />
+
+          {/* <button > {renderLoginButton()}</button> */}
 
           <button className={styles.submits} onClick={() => setIsRegister(!isRegister)}>
-        {isRegister ? 'ya tengo una cuenta' : 'Quiero Registrarme'}
+        {isRegister ? 'Ya tengo una cuenta' : 'Quiero Registrarme'}
       </button>
         </fieldset>
       </form>
     </div>
+    // </Fragment>
+    
   )
 }
 
 export default Logins
+
