@@ -1,28 +1,36 @@
-
 import React, { useState } from 'react'
 import styles from '../styles/login.module.css'
 import firebaseApp from "../Callfirebase/firebase";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore"
 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithRedirect, GoogleAuthProvider
+} from "firebase/auth";
+import {
+  getFirestore,
+  doc,
+  setDoc
+} from "firebase/firestore"
 
 import logo from '@logos/logo_yard_sale.svg'
+import logogoogle from '@logos/google-logo.svg'
 
-
+const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(firebaseApp);
 
-// const handlerAuth = ()=>{
-//   let provider = new firebaseApp.auth.GoogleAuthProvider(GoogleAuthProvider);
-
-//   firebaseApp.auth().signInWithPopup(provider)
-//   .then(function(result) {
-//     setUser(result.user)
-//      console.log(' ha iniciado session');
-//   })
-//   .catch(function(error){
-//        console.log(error.code , error.message)
-//   })
-// }
+const handlerAuth = () => {
+  let provider = new firebaseApp.auth.GoogleAuthProvider(GoogleAuthProvider);
+  firebaseApp.auth().signInWithPopup(provider)
+    .then(function (result) {
+      setUser(result.user)
+      console.log(' ha iniciado session');
+    })
+    .catch(function (error) {
+      console.log(error.code, error.message)
+    })
+}
 
 function Logins() {
   const firestore = getFirestore(firebaseApp)
@@ -54,26 +62,15 @@ function Logins() {
     }
   }
 
-  // useEffect(()=>{
-  //   firebaseApp.auth().onAuthStateChanged(user=>{
-  //     setUser(user)
-  //   })
-   
-  // },[])
-
-//   const renderLoginButton = ()=>{
-//      return  <button onClick={handlerAuth} className="btn btn-primary">Login with google</button>
-// }
-
   return (
-    // <Fragment>
-      <div className={styles.box}>
-      <form onSubmit={submitHandler}>
-      <fieldset>
-      <legend><b><h1>{isRegister ? "Registrate" : "Inicia Sesión"}</h1></b></legend>
-
-            <img src={logo} alt="logo" className={styles.navlogo} />
     
+    <div className={styles.box}>
+      <form onSubmit={submitHandler}>
+        <fieldset>
+          <legend><b><h1>{isRegister ? "Registrate" : "Inicia Sesión"}</h1></b></legend>
+
+          <img src={logo} alt="logo" className={styles.navlogo} />
+
           <div className={styles.inputBox}>
             <input type="text" name="email" id="email" className={styles.inputUser} required />
             <label for="email" className={styles.labelInput}>Email</label>
@@ -84,21 +81,29 @@ function Logins() {
             <label for="password" className={styles.labelInput}>Contrasena</label>
           </div>
 
-          <input className={styles.submit}  type="submit"
-          value={isRegister ? "Registrar" : "Iniciar Sesión"}  name="submit" id="submit" />
+          <input className={styles.submit} type="submit"
+            value={isRegister ? "Registrar" : "Iniciar Sesión"} name="submit" id="submit" />
 
-          {/* <button > {renderLoginButton()}</button> */}
+          <div>
+
+            <button className={styles.submits}
+              onClick={() => {
+                signInWithRedirect(auth, googleProvider);
+              }}
+            >
+
+              <img src={logogoogle} alt="logo" className={styles.logo} />
+            </button>
+          </div>
 
           <button className={styles.submits} onClick={() => setIsRegister(!isRegister)}>
-        {isRegister ? 'Ya tengo una cuenta' : 'Quiero Registrarme'}
-      </button>
+            {isRegister ? 'Ya tengo una cuenta' : 'Quiero Registrarme'}
+          </button>
         </fieldset>
       </form>
     </div>
-    // </Fragment>
     
   )
 }
 
 export default Logins
-

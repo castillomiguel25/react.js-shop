@@ -28,7 +28,7 @@ const firestore = getFirestore(firebaseApp)
 function App() {
     
     
-    const [user, setUser] = useState(null);
+    // const [user, setUser] = useState(null);
 
     async function getRol(uid) {
 
@@ -60,6 +60,16 @@ function App() {
             setUser(null);
         }
     });
+
+
+    const [user, setUser] = useState(null);
+  onAuthStateChanged(auth, (usuariofirebase) => {
+      if (usuariofirebase) {
+          setUser(usuariofirebase);
+      } else {
+          setUser(null);
+      }
+  });
     return (
        
                 <>{user ? <Home user={user} /> : <Login />} </>
