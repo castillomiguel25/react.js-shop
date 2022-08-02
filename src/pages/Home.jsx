@@ -6,7 +6,7 @@ import Layout from '../containers/Layout';
 
 
 
-const Home = ({ user }) => {
+const Home = () => {
 	const initialState = useInitialState();
   return (
     <>
