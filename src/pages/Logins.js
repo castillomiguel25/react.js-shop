@@ -63,13 +63,11 @@ function Logins() {
   }
 
   return (
-    
+
     <div className={styles.box}>
       <form onSubmit={submitHandler}>
         <fieldset>
           <legend><b><h1>{isRegister ? "Registrate" : "Inicia Sesión"}</h1></b></legend>
-
-          <img src={logo} alt="logo" className={styles.navlogo} />
 
           <div className={styles.inputBox}>
             <input type="text" name="email" id="email" className={styles.inputUser} required />
@@ -81,28 +79,26 @@ function Logins() {
             <label for="password" className={styles.labelInput}>Contrasena</label>
           </div>
 
-          <input className={styles.submit} type="submit"
-            value={isRegister ? "Registrar" : "Iniciar Sesión"} name="submit" id="submit" />
+          <div className={styles.father}>
+            <input className={styles.submit} type="submit"
+              value={isRegister ? "Registrar" : "Iniciar Sesión"} name="submit" id="submit" />
 
-          <div>
-
-            <button className={styles.submits}
+            <button className={styles.submitss}
               onClick={() => {
                 signInWithRedirect(auth, googleProvider);
               }}
             >
-
               <img src={logogoogle} alt="logo" className={styles.logo} />
             </button>
-          </div>
 
-          <button className={styles.submits} onClick={() => setIsRegister(!isRegister)}>
-            {isRegister ? 'Ya tengo una cuenta' : 'Quiero Registrarme'}
-          </button>
+            <button className={styles.submits} onClick={() => setIsRegister(!isRegister)}>
+              {isRegister ? 'Ya tengo una cuenta' : 'Quiero Registrarme'}
+            </button>
+          </div>
         </fieldset>
       </form>
     </div>
-    
+
   )
 }
 
