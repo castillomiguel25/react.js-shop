@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import '../styles/ProductItem.scss';
 import AppContext from '../context/AppContext';
-import card from '@icons/bt_add_to_cart.svg'
+import card from '@logos/cart.svg'
 
 const ProductItem = ({ product }) => {
 	const { addToCart } = useContext(AppContext);

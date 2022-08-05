@@ -22,7 +22,7 @@ const Header = ({cart}) => {
 		<nav>
 			<img src={menu} className="menu" />
 			<div className="navbar-left">
-				<img src={logo} alt="logo" className="nav-logo" />
+				{/* <img src={logo} alt="logo" className="nav-logo" /> */}
 				{ <ul>
 					
 					<li  onClick={() => signOut(auth)}>
