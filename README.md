@@ -2,7 +2,7 @@
 🔗 Descripción 📖
 
 🛍️🛒Tienda virtual realizada
-     con React.js y Firebase.
+     con React.js, API y Firebase.
 
 👤 Url de mi portafolio personal 
    https://miguelcastillo97.netlify.app/
@@ -17,7 +17,8 @@
 .Javascript
 .React.js
 .Firebase 
-
+.Axios
+.Webpack
 
 🛠️ Project setup
 ```
@@ -25,7 +26,7 @@ npm install
 ```
 ### Compiles and hot-reloads for development
 ```
-🖥️npm run serve
+🖥️npm run start
 ```
 ### Compiles and minifies for production
 ```
